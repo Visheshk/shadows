@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Load the Paper.js library -->
+<script type="text/javascript" src="paper.js"></script>
+<!-- Define inlined PaperScript associate it with myCanvas -->
+<script type="text/paperscript" canvas="myCanvas">
+
+var lay1 = new Layer();
+lay1.activate();
+var x = -91;
+var y = 106;
+var z = 9;
+
+var from1 = new Point(0, 0);
+var to1 = new Point(0, 0);
+var from2 = new Point(0, 0);
+var to2 = new Point(0, 0);
+var diag1 = new Point(0, 0);
+var diag2 = new Point(0, 0);
+var center = new Point(300, 300);
+
+
+
+setSquares();
+
+function setSquares() {
+    from1.x = -2 * x / (z + 1);
+    from1.y = -2 * y / (z + 1);
+    diag1 = new Point((z+3)/(z+1), (z+3)/(z+1));
+    to1 = from1 + diag1;
+    
+    from2.x = -3 * x / z;
+    from2.y = -3 * y / z;
+    diag2 = new Point((z+3)/(z), (z+3)/(z));
+    to2 = from2 + diag2;
+    
+    from1 += center;
+    to1 += center;
+    from2 += center;
+    to2 += center;
+    //console.log(x, y, z);
+}
+
+var rect1 = new Rectangle(from1, to1);
+var rect2 = new Rectangle(from2, to2);
+var path1 = new Path.Rectangle(rect1);
+path1.strokeColor = 'black';
+var path2 = new Path.Rectangle(rect2);
+path2.strokeColor = 'black';
+
+var scale = 80;
+
+
+var line1 = new Path.Line();
+var line2 = new Path.Line();
+var line3 = new Path.Line();
+var line4 = new Path.Line();
+
+/*var vert11 = new Point();
+var vert12 = new Point();
+var vert21 = new Point();
+var vert22 = new Point();
+var vert31 = new Point();
+var vert32 = new Point();
+var vert41 = new Point();
+var vert42 = new Point();
+
+setLineVertices();
+
+
+function setLineVertices(){
+	vert11 = from1;
+	vert12 = from2;
+	vert21 = from1 + new Point(diag1.x, 0);
+	vert22 = from2 + new Point(diag2.x, 0);
+	vert31 = from1 + diag1;
+	vert32 = from2 + diag2;
+	vert41 = from1 + new Point(0, diag1.y);
+	vert42 = from1 + new Point(0, diag1.y);
+	drawLines();
+}
+
+function drawLines(){
+	line1.removeSegments();
+	line2.removeSegments();
+	line3.removeSegments();
+	line4.removeSegments();
+
+	line1 = new Path.Line(vert11, vert12);
+	line2 = new Path.Line(vert21, vert22);
+	line3 = new Path.Line(vert31, vert32);
+	line4 = new Path.Line(vert31, vert42);
+
+	line1.strokeColor = 'black';
+	line2.strokeColor = 'black';
+	line3.strokeColor = 'black';
+	line4.strokeColor = 'black';
+	console.log(line1.segments[0].getPoint(), line1.segments[1].getPoint());
+	console.log(line2.segments[0].getPoint(), line2.segments[1].getPoint());
+	console.log(line3.segments[0].getPoint(), line3.segments[1].getPoint());
+	console.log(line4.segments[0].getPoint(), line4.segments[1].getPoint());
+}*/
+
+scalePaths();
+
+function scalePaths(){
+	path1.scale(scale);
+	path2.scale(scale);
+	//lay1.scale(2);
+	/*line1.scale(scale);
+	line2.scale(scale);
+	line3.scale(scale);
+	line4.scale(scale);*/
+}
+
+function drawLines(){
+	line1.removeSegments();
+	line1 = new Path.Line(path1.segments[0].getPoint(), path2.segments[0].getPoint());
+	line1.strokeColor = 'black';
+
+	line2.removeSegments();
+	line2 = new Path.Line(path1.segments[1].getPoint(), path2.segments[1].getPoint());
+	line2.strokeColor = 'black';
+
+	line3.removeSegments();
+	line3 = new Path.Line(path1.segments[2].getPoint(), path2.segments[2].getPoint());
+	line3.strokeColor = 'black';
+
+	line4.removeSegments();
+	line4 = new Path.Line(path1.segments[3].getPoint(), path2.segments[3].getPoint());
+	line4.strokeColor = 'black';
+}
+
+updateSquares();
+
+function updateSquares(){
+    setSquares();
+    rect1 = new Rectangle(from1, to1);
+    rect2 = new Rectangle(from2, to2);
+    
+    path1.removeSegments();
+    path1 = new Path.Rectangle(rect1);
+    path1.strokeColor = 'black';
+    
+    path2.removeSegments();
+    path2 = new Path.Rectangle(rect2);
+    path2.strokeColor = 'black';
+    //setLineVertices();
+    scalePaths();
+    console.log(path1.segments[0].getPoint(), path1.segments[1].getPoint(), path1.segments[2].getPoint(), path1.segments[3].getPoint());
+    console.log(path2.segments[0].getPoint(), path2.segments[1].getPoint(), path2.segments[2].getPoint(), path2.segments[3].getPoint());
+    drawLines();
+
+}
+
+var delt = 5;	
+function onKeyDown(event) {
+	if (event.key == 'w') {
+		y = y + delt;
+		updateSquares();
+		// Prevent the key event from bubbling
+		return false;
+	}
+	else if (event.key == 's') {
+		y = y - delt;
+		updateSquares();
+		// Prevent the key event from bubbling
+		return false;
+	}
+	else if (event.key == 'a') {
+		x = x - delt;
+		updateSquares();
+		// Prevent the key event from bubbling
+		return false;
+	}
+	else if (event.key == 'd') {
+		x = x + delt;
+		updateSquares();
+		// Prevent the key event from bubbling
+		return false;
+	}
+	else if (event.key == 'q') {
+		if (z - delt/3 > 3)
+			z = z - delt/3;
+		else if (z - delt/20 > 3)
+			z = z - delt/20;
+		updateSquares();
+		// Prevent the key event from bubbling
+		return false;
+	}
+	else if (event.key == 'e') {
+		z = z + delt/3;
+		updateSquares();
+		// Prevent the key event from bubbling
+		return false;
+	}
+	
+}
+</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+</body>
+</html>
