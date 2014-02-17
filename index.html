@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Shadows by Visheshk</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Shadows</h1>
+        <p class="header">An interactive simulation of projections of solid objects in lower dimensions</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/Visheshk/shadows/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/Visheshk/shadows/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/Visheshk/shadows">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/Visheshk">Visheshk</a></p>
+
+
+      </header>
+      <section>
+        <h2>
+<a name="shadows" class="anchor" href="#shadows"><span class="octicon octicon-link"></span></a>Shadows</h2>
+
+<p>This is intended to be a more wide covering game or set of games or simulations, that cover a variety of 3 to 2 dimension projections, and ideally in the future, 4 to 3 dimension projections as well.</p>
+
+<p>It would be interesting to see what places this can go. Hopefully something interesting?</p>
+
+<h3>
+<a name="current-state" class="anchor" href="#current-state"><span class="octicon octicon-link"></span></a>Current State</h3>
+
+<p>Currently, shadow1.html is a very simple, and poorly coded simulation of how the shadow of a cubical frame would change, if a point source of light in front of a cube moves. The controls w, a, s, d move the point source of light up (northward), down, left, and right respectively. The cube creating the shadow and the source of light are behind you. The point is that you can only see the sadow, and you're supposed to see patterns by observing what happens with different shadows.</p>
+
+<p>The calculations have been manually calculated for a cube, with a fair chance of mistake, especially in lateral stretching. Which, by my calculation, doesn't happen at all. Though in my imagination, it does.
+Tell me if you can what I'm doing wrong, and where.
+Also, the figures don't look shadowy at all. Maybe some blurs and stuff. Aand, maybe the projection system I've used is not very correct for a point source of light. Need to ensure its accuracy, among other stuff.</p>
+
+<p>And the shadow is not at all, being created dynamically from one source object, which for starters, is how things should be.</p>
+
+<h3>
+<a name="possible-future-steps" class="anchor" href="#possible-future-steps"><span class="octicon octicon-link"></span></a>Possible future steps</h3>
+
+<p>After creating the shadow by simply defining the source object's face, I'd want to provide support for seeing the shadow by rotating the object. Along different axes.</p>
+
+<p>Of course moving to further dimensions is desirable after that, but visibly distant.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
